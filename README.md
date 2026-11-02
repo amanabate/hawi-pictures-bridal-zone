@@ -172,3 +172,4 @@ Alternatively, configure a webhook in Vercel Cron or GitHub Actions calling `POS
 | Telegram Bot Token | **Decision Needed** | Register bot with `@BotFather` on Telegram and set `TELEGRAM_BOT_TOKEN` and `TELEGRAM_OWNER_CHAT_ID` in `.env.local`. |
 | Admin PINs | **Ready** | Default PINs are configured (`hawi2026`, `reception123`, `staff123`). Change to custom private PINs in production. |
 | Telebirr & Bank Accounts | **Configured** | Populated with real studio contact (`0988018016`) and placeholder bank accounts. Update in Admin -> Settings if bank accounts change. |
+# hawi-pictures-bridal-zone
