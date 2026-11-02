@@ -1,6 +1,0 @@
-{
-  "name": "Hawi Pictures & Bridal Zone",
-  "description": "Luxury wedding photography, bridal salon and beauty services in Ethiopia. Browse bridal packages, book your wedding date, and manage reservations.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}

@@ -8,7 +8,7 @@ import {
   DEFAULT_LANGUAGE,
   SUPPORTED_LANGUAGES,
 } from '@/locales';
-import { translate, formatCurrency as formatCurr, formatDate as formatDt } from './i18n';
+import { translate, formatCurrency as formatCurr, formatDate as formatDt } from '../i18n/i18n';
 import { OWNER_PLACEHOLDERS, OwnerPlaceholders } from '@/data/about';
 
 interface LanguageContextType {

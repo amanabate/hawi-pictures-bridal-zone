@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import './globals.css';
+import '../globals.css';
 import { LanguageProvider } from '@/lib/language-context';
 import OfflineBanner from '@/components/pwa/OfflineBanner';
 import PWAInstallPrompt from '@/components/pwa/PWAInstallPrompt';

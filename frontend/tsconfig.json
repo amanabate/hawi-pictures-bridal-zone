@@ -22,6 +22,27 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
+      "@/components/layout/*": ["./components/layout/*"],
+      "@/components/features/*": ["./components/features/*"],
+      "@/components/home/*": ["./components/features/home/*"],
+      "@/components/admin/*": ["./components/features/admin/*"],
+      "@/components/booking/*": ["./components/features/booking/*"],
+      "@/components/packages/*": ["./components/features/packages/*"],
+      "@/components/pwa/*": ["./components/features/pwa/*"],
+      "@/components/ui/*": ["./components/ui/*"],
+      "@/components/*": ["./components/*", "./components/layout/*", "./components/features/*"],
+      "@/lib/language-context": ["./lib/context/language-context"],
+      "@/lib/supabase/*": ["../backend/lib/supabase/*"],
+      "@/hooks/*": ["./lib/hooks/*"],
+      "@/lib/*": [
+        "./lib/*",
+        "./lib/context/*",
+        "./lib/stores/*",
+        "./lib/hooks/*",
+        "./lib/i18n/*"
+      ],
+      "@/data/*": ["./constants/*"],
+      "@/tests/*": ["../backend/tests/*"],
       "@/backend/*": ["../backend/*"]
     }
   },
