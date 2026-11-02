@@ -1,0 +1,118 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+Ethiopic:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  /* Light Theme (#FAF7F2 background, black text, #C9A24D gold accent) */
+  --bg: #FAF7F2;
+  --surface: #FFFFFF;
+  --card: #FFFFFF;
+  --card-subtle: #F4EFE6;
+  --text: #14110E;
+  --text-muted: #6E665E;
+  --border: #E6DFD5;
+  --border-subtle: #F0E9DF;
+  --gold: #C9A24D;
+  --gold-dark: #A88232;
+  --gold-light: #F7E8C8;
+  --gold-bg: #FAF2DF;
+  --gold-gradient: linear-gradient(135deg, #C9A24D 0%, #A88232 100%);
+  --gold-text: #8A641A;
+  --input-bg: #FFFFFF;
+  --badge-bg: #F5EFE6;
+  --overlay-bg: rgba(20, 17, 14, 0.65);
+}
+
+.dark {
+  /* Dark Theme (#0B0803 background, white text, #FCD535 to #EAB308 gold gradient) */
+  --bg: #0B0803;
+  --surface: #141008;
+  --card: #18130B;
+  --card-subtle: #241C10;
+  --text: #F5F3EF;
+  --text-muted: #A39A8E;
+  --border: #282013;
+  --border-subtle: #362C1B;
+  --gold: #FCD535;
+  --gold-dark: #EAB308;
+  --gold-light: #423512;
+  --gold-bg: #221908;
+  --gold-gradient: linear-gradient(135deg, #FCD535 0%, #EAB308 100%);
+  --gold-text: #FDE047;
+  --input-bg: #161108;
+  --badge-bg: #231B0E;
+  --overlay-bg: rgba(0, 0, 0, 0.85);
+}
+
+@theme {
+  --color-app-bg: var(--bg);
+  --color-app-surface: var(--surface);
+  --color-app-card: var(--card);
+  --color-app-card-subtle: var(--card-subtle);
+  --color-app-text: var(--text);
+  --color-app-muted: var(--text-muted);
+  --color-app-border: var(--border);
+  --color-app-border-subtle: var(--border-subtle);
+  --color-app-gold: var(--gold);
+  --color-app-gold-dark: var(--gold-dark);
+  --color-app-gold-bg: var(--gold-bg);
+  --color-app-gold-text: var(--gold-text);
+  --color-app-input: var(--input-bg);
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg);
+    color: var(--text);
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  }
+
+  /* Support for Amharic Ethiopic script */
+  :lang(am), [lang="am"], [lang="am"] body {
+    font-family: 'Noto Sans Ethiopic', var(--font-sans);
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-serif);
+  }
+
+  :lang(am) h1, :lang(am) h2, :lang(am) h3,
+  [lang="am"] h1, [lang="am"] h2, [lang="am"] h3 {
+    font-family: 'Noto Sans Ethiopic', var(--font-serif);
+    letter-spacing: normal;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* Typewriter blinking cursor */
+@keyframes cursorBlink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-cursor-blink {
+  animation: cursorBlink 0.85s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}

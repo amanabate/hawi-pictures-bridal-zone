@@ -1,0 +1,15 @@
+
+  <svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="300" fill="#18130B" />
+    <rect x="8" y="8" width="384" height="284" rx="16" fill="none" stroke="#3D2D15" stroke-width="2" />
+    <!-- Camera outline -->
+    <g transform="translate(200, 120)">
+      <rect x="-40" y="-25" width="80" height="55" rx="8" fill="none" stroke="#D4AF37" stroke-width="3" />
+      <path d="M -15 -25 L -8 -36 L 8 -36 L 15 -25 Z" fill="#D4AF37" />
+      <circle cx="0" cy="2" r="16" fill="none" stroke="#D4AF37" stroke-width="3" />
+      <circle cx="22" cy="-12" r="4" fill="#D4AF37" />
+    </g>
+    <text x="200" y="195" font-family="Georgia, serif" font-size="16" font-weight="bold" fill="#D4AF37" text-anchor="middle">Hawi Pictures</text>
+    <text x="200" y="220" font-family="system-ui, sans-serif" font-size="12" fill="#94A3B8" text-anchor="middle">Image available when reconnected</text>
+  </svg>
+  
