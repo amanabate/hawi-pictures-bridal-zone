@@ -440,7 +440,7 @@ export default function AdminCalendarView({
                 </span>
               </div>
 
-              <h3 className="font-serif text-xl font-bold text-[var(--text)]">
+              <h3 className="font-serif text-xl font-bold text-[var(--text)]" suppressHydrationWarning>
                 {formatDate(selectedDayStr)}
               </h3>
 

@@ -105,7 +105,7 @@ export default function ActivityLogView() {
               <div className="flex-1 min-w-0 space-y-1">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <span className="font-semibold text-xs text-[var(--text)]">{log.action}</span>
-                  <span className="text-[11px] font-mono text-[var(--text-muted)]">
+                  <span className="text-[11px] font-mono text-[var(--text-muted)]" suppressHydrationWarning>
                     {formatDate(log.timestamp)}
                   </span>
                 </div>
