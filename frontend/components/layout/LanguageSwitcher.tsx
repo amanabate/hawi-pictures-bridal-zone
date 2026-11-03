@@ -33,7 +33,7 @@ export default function LanguageSwitcher({ compact = false }: { compact?: boolea
   const currentLanguage = LANGUAGES.find((lang) => lang.code === language) || LANGUAGES[0];
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative z-50" ref={dropdownRef}>
       {/* Trigger Button */}
       <button
         type="button"
@@ -56,7 +56,7 @@ export default function LanguageSwitcher({ compact = false }: { compact?: boolea
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-[var(--surface)] border border-[var(--border)] rounded-xl shadow-xl z-50 overflow-hidden animate-in fade-in slide-in-from-top-2">
+        <div className="absolute right-0 mt-2 w-48 bg-[var(--surface)] border border-[var(--border)] rounded-xl shadow-2xl z-[100] overflow-hidden animate-in fade-in slide-in-from-top-2">
           <div className="py-1">
             {LANGUAGES.map((lang) => {
               const isActive = language === lang.code;
