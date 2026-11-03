@@ -89,7 +89,7 @@ export default function StudioLocationContact() {
                 <MapPin className="w-5 h-5 text-[var(--gold)] shrink-0 mt-0.5" />
                 <div>
                   <div className="font-bold text-[var(--text)] mb-0.5">Studio Addresses:</div>
-                  <div>Bole Medhanialem & Piassa Studio, Addis Ababa, Ethiopia</div>
+                  <div>Shager, Burayu Mariam Studio</div>
                 </div>
               </div>
 

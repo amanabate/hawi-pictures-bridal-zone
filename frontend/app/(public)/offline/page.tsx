@@ -112,7 +112,7 @@ export default function OfflinePage() {
 
           <div className="flex items-center justify-center gap-1.5 text-[11px] text-[var(--text-muted)] pt-1">
             <MapPin className="w-3.5 h-3.5 text-[var(--gold)]" />
-            <span>Bole Medhanialem, Behind Edna Mall, Addis Ababa</span>
+            <span>Shager, Burayu Mariam</span>
           </div>
         </div>
       </div>

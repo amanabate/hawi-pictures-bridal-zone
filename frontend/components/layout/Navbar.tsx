@@ -49,42 +49,7 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top Banner with Tap-To-Call Phone Numbers & Brand Details */}
-      <div className="bg-[#141008] text-[#E5D7C5] text-xs py-2 px-4 border-b border-[#282013]">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <span className="inline-block w-2 h-2 rounded-full bg-[var(--gold)]" />
-            <span className="font-medium text-[#FAF8F5]">{t('cta.locationTag')}, Ethiopia</span>
-            <span className="text-[#8C827A] hidden sm:inline">·</span>
-            <span className="text-[#B3A89D] hidden sm:inline">
-              {t('hero.subservicesLine')}
-            </span>
-          </div>
 
-          <div className="flex items-center gap-4">
-            <span className="text-[#9E948A] hidden md:inline">{t('hero.callStudio')}:</span>
-            <div className="flex items-center gap-3">
-              <a
-                href={`tel:${CONTACT_PHONES[0].raw}`}
-                className="inline-flex items-center gap-1.5 text-[var(--gold)] hover:brightness-125 font-medium transition-all"
-                title={t('nav.callStudio')}
-              >
-                <Phone className="w-3.5 h-3.5 text-[var(--gold)]" />
-                <span className="tabular-nums">0988 01 80 16</span>
-              </a>
-              <span className="text-[#3E3324]">|</span>
-              <a
-                href={`tel:${CONTACT_PHONES[1].raw}`}
-                className="inline-flex items-center gap-1.5 text-[var(--gold)] hover:brightness-125 font-medium transition-all"
-                title={t('nav.callSalon')}
-              >
-                <Phone className="w-3.5 h-3.5 text-[var(--gold)]" />
-                <span className="tabular-nums">0914 87 80 07</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Main Navigation Bar */}
       <header className="sticky top-0 z-40 bg-[var(--surface)]/95 backdrop-blur-md border-b border-[var(--border)] transition-colors duration-200">
