@@ -11,6 +11,7 @@ import {
   CheckCircle2,
   AlertCircle,
   Sparkles,
+  CreditCard,
   Copy,
   Check,
   Send,
@@ -23,6 +24,7 @@ import {
 } from 'lucide-react';
 import {
   PACKAGES_DATA,
+  PAYMENT_METHODS,
   CONTACT_PHONES,
   getPackageName,
   getPackageTagline,
@@ -67,10 +69,11 @@ export default function BookingForm() {
   // Initial event date (default stable upcoming weekend date)
   const [eventDate, setEventDate] = useState('2026-11-14');
   const [timeOfDay, setTimeOfDay] = useState('Full Day (All Day & Evening)');
-  const [venue, setVenue] = useState('');
   const [notes, setNotes] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('Commercial Bank of Ethiopia (CBE)');
   const [screenshotPreview, setScreenshotPreview] = useState<string | null>(null);
   const [screenshotFile, setScreenshotFile] = useState<File | null>(null);
+  const [referenceNumber, setReferenceNumber] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -99,8 +102,8 @@ export default function BookingForm() {
           if (typeof draft.isPhoneOnly === 'boolean') setIsPhoneOnly(draft.isPhoneOnly);
           if (draft.eventDate) setEventDate(draft.eventDate);
           if (draft.timeOfDay) setTimeOfDay(draft.timeOfDay);
-          if (draft.venue) setVenue(draft.venue);
           if (draft.notes) setNotes(draft.notes);
+          if (draft.paymentMethod) setPaymentMethod(draft.paymentMethod);
         }
       } catch {
         // ignore
@@ -120,16 +123,16 @@ export default function BookingForm() {
         phone,
         telegramUsername,
         isPhoneOnly,
-        venue,
         notes,
         eventDate,
-        timeOfDay
+        timeOfDay,
+        paymentMethod
       };
       localStorage.setItem('hawi_booking_draft_v1', JSON.stringify(draft));
     } catch {
       // ignore
     }
-  }, [hasLoadedDraft, fullName, phone, telegramUsername, isPhoneOnly, venue, notes, eventDate, timeOfDay]);
+  }, [hasLoadedDraft, fullName, phone, telegramUsername, isPhoneOnly, notes, eventDate, timeOfDay, paymentMethod]);
 
   // Synchronize package selection if URL parameter updates
   const [prevParam, setPrevParam] = useState(preSelectedPackageId);
@@ -239,11 +242,6 @@ export default function BookingForm() {
       return;
     }
 
-    if (!venue.trim()) {
-      setErrorMsg(t('booking.errors.enterVenue'));
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
@@ -254,6 +252,13 @@ export default function BookingForm() {
       else if (timeLower.includes('afternoon')) period = 'afternoon';
       else if (timeLower.includes('evening')) period = 'evening';
 
+      let normPaymentMethod = 'cbe';
+      const pmLower = paymentMethod.toLowerCase();
+      if (pmLower.includes('telebirr')) normPaymentMethod = 'telebirr';
+      else if (pmLower.includes('abyssinia')) normPaymentMethod = 'abyssinia';
+      else if (pmLower.includes('dashen')) normPaymentMethod = 'dashen';
+      else if (pmLower.includes('cash')) normPaymentMethod = 'cash';
+
       const formData = new FormData();
       formData.append('customerName', fullName.trim());
       formData.append('phone', phone.trim());
@@ -262,12 +267,12 @@ export default function BookingForm() {
       formData.append('packageId', currentPackage.id);
       formData.append('eventDate', eventDate);
       formData.append('period', period);
-      formData.append('venue', venue.trim());
+      formData.append('venue', '');
       formData.append('city', 'Addis Ababa');
       formData.append('notes', notes.trim());
       formData.append('language', clientLanguage);
-      formData.append('paymentMethod', 'inquiry');
-      formData.append('referenceNumber', `INQ-${Date.now().toString().slice(-6)}`);
+      formData.append('paymentMethod', normPaymentMethod);
+      formData.append('referenceNumber', referenceNumber.trim() || `TXN-${Date.now().toString().slice(-6)}`);
 
       if (screenshotFile) {
         formData.append('screenshot', screenshotFile);
@@ -309,10 +314,10 @@ export default function BookingForm() {
         depositRequired: currentPackage.depositAmount,
         eventDate: serverBooking.event_date,
         timeOfDay,
-        venue: venue.trim(),
+        venue: '',
         notes: notes.trim(),
         paymentScreenshot: screenshotPreview || undefined,
-        paymentMethod: 'inquiry',
+        paymentMethod,
         status: 'Pending',
         notificationStatus: {
           notified: false
@@ -785,23 +790,6 @@ export default function BookingForm() {
                   </div>
                 ) : null}
 
-                {/* Venue */}
-                <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-[var(--text)]">
-                    {t('booking.venueLabel')} <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder={t('booking.venuePlaceholder')}
-                    value={venue}
-                    onChange={(e) => setVenue(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl bg-[var(--input-bg)] border border-[var(--border)] text-xs sm:text-sm text-[var(--text)] placeholder-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--gold)] transition-all"
-                  />
-
-
-                </div>
-
                 {/* Notes */}
                 <div className="space-y-1.5 pt-1">
                   <label className="text-xs font-semibold text-[var(--text)]">
@@ -817,17 +805,58 @@ export default function BookingForm() {
                 </div>
               </div>
 
-              {/* Step 4: Screenshot Upload */}
+              {/* Step 4: Payment Screenshot Upload */}
               <div className="space-y-4 pt-2">
                 <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--gold)] border-b border-[var(--border)] pb-2">
-                  <Upload className="w-4 h-4 text-[var(--gold)]" />
-                  <span>Supporting Documents</span>
+                  <CreditCard className="w-4 h-4 text-[var(--gold)]" />
+                  <span>{t('booking.paymentSectionTitle')}</span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold text-[var(--text)]">
+                      {t('booking.paymentSubtitle')}
+                    </label>
+                    <select
+                      value={paymentMethod}
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                      className="w-full px-4 py-2.5 rounded-xl bg-[var(--input-bg)] border border-[var(--border)] text-xs sm:text-sm text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--gold)] transition-all"
+                    >
+                      {PAYMENT_METHODS.map((m, idx) => (
+                        <option key={idx} value={m.name} className="bg-[var(--surface)] text-[var(--text)]">
+                          {m.name} ({m.accountNumber})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold text-[var(--text)]">
+                      Ref / Txn Number
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. TF2611... or CBE Ref"
+                      value={referenceNumber}
+                      onChange={(e) => setReferenceNumber(e.target.value)}
+                      className="w-full px-4 py-2.5 rounded-xl bg-[var(--input-bg)] border border-[var(--border)] text-xs sm:text-sm text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--gold)] transition-all font-mono"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold text-[var(--text)]">
+                      {t('booking.depositRequiredLabel')}
+                    </label>
+                    <div className="px-4 py-2.5 rounded-xl bg-[var(--card-subtle)] border border-[var(--border)] text-xs sm:text-sm font-bold text-[var(--gold)] font-mono tabular-nums">
+                      {currentPackage.depositAmount || 'To be confirmed with studio'}
+                    </div>
+                  </div>
                 </div>
 
                 {/* File Upload Box */}
                 <div className="space-y-2">
                   <label className="text-xs font-semibold text-[var(--text)]">
-                    {t('booking.uploadLabel')} <span className="text-[var(--text-muted)] font-normal">(Optional)</span>
+                    {t('booking.uploadLabel')} <span className="text-[var(--text-muted)] font-normal">{t('booking.uploadHint')}</span>
                   </label>
 
                   {screenshotPreview ? (
