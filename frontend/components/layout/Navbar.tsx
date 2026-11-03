@@ -53,29 +53,29 @@ export default function Navbar() {
 
       {/* Main Navigation Bar */}
       <header className="sticky top-0 z-40 bg-[var(--surface)]/95 backdrop-blur-md border-b border-[var(--border)] transition-colors duration-200 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-2 sm:gap-4 lg:gap-8">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-1 sm:gap-2 md:gap-3 lg:gap-4">
           {/* Zone 1: Brand title wordmark */}
           <Link
             href="/"
-            className="flex items-center gap-2 sm:gap-2.5 group whitespace-nowrap shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-lg p-1 min-w-0"
+            className="flex items-center gap-1.5 sm:gap-2 group whitespace-nowrap flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-lg p-1"
           >
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-[var(--gold)] via-[var(--gold-dark)] to-[#785414] p-0.5 shadow-sm group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-full bg-gradient-to-br from-[var(--gold)] via-[var(--gold-dark)] to-[#785414] p-0.5 shadow-sm group-hover:scale-105 transition-transform flex items-center justify-center flex-shrink-0">
               <div className="w-full h-full rounded-full bg-[#141008] flex items-center justify-center text-[var(--gold)]">
-                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--gold)]" />
+                <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-[var(--gold)]" />
               </div>
             </div>
-            <div className="flex flex-col min-w-0">
-              <span className="font-serif text-base sm:text-lg lg:text-2xl font-bold tracking-tight text-[var(--text)] leading-tight truncate">
+            <div className="flex flex-col min-w-0 max-w-[120px] sm:max-w-none">
+              <span className="font-serif text-sm sm:text-base lg:text-lg xl:text-xl font-bold tracking-tight text-[var(--text)] leading-tight truncate">
                 Hawi Pictures
               </span>
-              <span className="text-[8px] sm:text-[9px] lg:text-[10px] tracking-[0.2em] sm:tracking-[0.25em] uppercase font-bold text-[var(--gold-text)] truncate">
+              <span className="text-[7px] sm:text-[8px] lg:text-[9px] tracking-[0.15em] sm:tracking-[0.2em] uppercase font-bold text-[var(--gold-text)] truncate">
                 & Bridal Zone
               </span>
             </div>
           </Link>
 
-          {/* Zone 2: Navigation Links (Desktop) */}
-          <nav className="hidden xl:flex items-center gap-6 text-sm font-medium text-[var(--text-muted)]">
+          {/* Zone 2: Navigation Links (Desktop XL) */}
+          <nav className="hidden xl:flex items-center gap-4 2xl:gap-6 text-xs 2xl:text-sm font-medium text-[var(--text-muted)] flex-shrink min-w-0">
             {navLinks.map((link) => {
               const active = isActive(link.href);
               return (
@@ -97,7 +97,7 @@ export default function Navbar() {
           </nav>
 
           {/* Compact nav for tablet / medium desktop */}
-          <nav className="hidden md:flex xl:hidden items-center gap-4 text-xs font-medium text-[var(--text-muted)]">
+          <nav className="hidden md:flex xl:hidden items-center gap-2 lg:gap-3 text-[10px] lg:text-xs font-medium text-[var(--text-muted)] flex-shrink min-w-0">
             {navLinks.slice(1, 6).map((link) => (
               <Link
                 key={link.href}
@@ -110,8 +110,8 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* Zone 3: Actions (Language Switcher + ThemeToggle + Quick Call + Primary CTA) */}
-          <div className="flex items-center gap-1.5 sm:gap-2 lg:gap-3 shrink-0">
+          {/* Zone 3: Actions (Desktop/Tablet - Language Switcher + ThemeToggle + Quick Call + Primary CTA) */}
+          <div className="hidden md:flex items-center gap-1 lg:gap-2 flex-shrink-0">
             {/* Language Switcher Pill */}
             <LanguageSwitcher />
 
@@ -119,14 +119,14 @@ export default function Navbar() {
             <ThemeToggle />
 
             {/* Quick Call Pill */}
-            <div className="relative">
+            <div className="relative hidden lg:block">
               <button
                 type="button"
                 onClick={() => setShowCallDropdown(!showCallDropdown)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[var(--text)] bg-[var(--card-subtle)] hover:bg-[var(--border)] border border-[var(--border)] rounded-full transition-colors whitespace-nowrap"
+                className="inline-flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 text-xs font-semibold text-[var(--text)] bg-[var(--card-subtle)] hover:bg-[var(--border)] border border-[var(--border)] rounded-full transition-colors whitespace-nowrap"
               >
                 <Phone className="w-3.5 h-3.5 text-[var(--gold)]" />
-                <span className="hidden lg:inline">{t('common.callUs')}</span>
+                <span className="hidden xl:inline">{t('common.callUs')}</span>
               </button>
 
               {showCallDropdown && (
@@ -171,30 +171,32 @@ export default function Navbar() {
             {/* Book Now Primary CTA */}
             <Link
               href="/booking"
-              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold text-[#141008] bg-gradient-to-r from-[var(--gold)] to-[var(--gold-dark)] hover:brightness-110 shadow-sm rounded-full transition-all hover:shadow-md whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 lg:gap-2 px-3 lg:px-4 py-1.5 lg:py-2 text-xs lg:text-sm font-semibold text-[#141008] bg-gradient-to-r from-[var(--gold)] to-[var(--gold-dark)] hover:brightness-110 shadow-sm rounded-full transition-all hover:shadow-md whitespace-nowrap"
             >
-              <Calendar className="w-4 h-4 text-[#141008]" />
-              <span>{t('nav.bookNowNav')}</span>
+              <Calendar className="w-3.5 h-3.5 lg:w-4 lg:h-4 text-[#141008]" />
+              <span className="hidden lg:inline">{t('nav.bookNowNav')}</span>
+              <span className="lg:hidden">{t('nav.bookShort') || 'Book'}</span>
             </Link>
           </div>
 
           {/* Mobile Header Right (LanguageSwitcher + ThemeToggle + Book Now + Hamburger) */}
-          <div className="flex md:hidden items-center gap-1.5">
+          <div className="flex md:hidden items-center gap-1 flex-shrink-0">
             <LanguageSwitcher compact />
             <ThemeToggle />
             <Link
               href="/booking"
-              className="px-2.5 py-1 text-xs font-semibold text-[#141008] bg-[var(--gold)] rounded-full whitespace-nowrap"
+              className="inline-flex items-center px-2 py-1 text-[10px] font-bold text-[#141008] bg-[var(--gold)] rounded-full whitespace-nowrap"
             >
-              {t('nav.bookShort')}
+              <Calendar className="w-3 h-3 mr-1" />
+              {t('nav.bookShort') || 'Book'}
             </Link>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-1.5 text-[var(--text)] hover:bg-[var(--card-subtle)] rounded-lg focus:outline-none"
+              className="p-1.5 text-[var(--text)] hover:bg-[var(--card-subtle)] rounded-lg focus:outline-none flex-shrink-0"
               aria-label="Toggle mobile menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
