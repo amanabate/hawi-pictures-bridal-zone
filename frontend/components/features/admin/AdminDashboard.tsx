@@ -764,51 +764,53 @@ export default function AdminDashboard() {
         {activeTab === 'Dashboard' && (
           <div className="space-y-8 max-w-7xl mx-auto">
             {/* Professional Dashboard Header */}
-            <div className="bg-gradient-to-br from-[var(--card)] via-[var(--surface)] to-[var(--card)] border border-[var(--border)] rounded-2xl shadow-lg p-6 sm:p-8">
-              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div className="bg-gradient-to-br from-[var(--card)] via-[var(--surface)] to-[var(--card)] border border-[var(--border)] rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 overflow-hidden">
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 lg:gap-6">
                 {/* Left: Title & Status */}
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--gold)] to-[var(--gold-dark)] flex items-center justify-center shadow-md">
-                      <LayoutDashboard className="w-6 h-6 text-white" />
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 sm:gap-3 mb-3">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rounded-xl bg-gradient-to-br from-[var(--gold)] to-[var(--gold-dark)] flex items-center justify-center shadow-md">
+                      <LayoutDashboard className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                     </div>
-                    <div>
-                      <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[var(--text)] tracking-tight">
+                    <div className="min-w-0 flex-1">
+                      <h1 className="font-serif text-xl sm:text-2xl lg:text-3xl font-bold text-[var(--text)] tracking-tight truncate">
                         {t('admin.sidebarTitle')}
                       </h1>
-                      <div className="flex items-center gap-2 mt-1">
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[var(--gold)]/10 border border-[var(--gold)]/30">
-                          <Shield className="w-3 h-3 text-[var(--gold)]" />
-                          <span className="text-[10px] font-bold text-[var(--gold)] uppercase tracking-wider">
+                      <div className="flex items-center gap-1.5 sm:gap-2 mt-1 flex-wrap">
+                        <span className="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-[var(--gold)]/10 border border-[var(--gold)]/30">
+                          <Shield className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[var(--gold)] flex-shrink-0" />
+                          <span className="text-[9px] sm:text-[10px] font-bold text-[var(--gold)] uppercase tracking-wider whitespace-nowrap">
                             {currentRole}
                           </span>
                         </span>
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30">
-                          <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                          <span className="text-[10px] font-semibold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider">
+                        <span className="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30">
+                          <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
+                          <span className="text-[9px] sm:text-[10px] font-semibold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider whitespace-nowrap">
                             Live
                           </span>
                         </span>
                       </div>
                     </div>
                   </div>
-                  <p className="text-xs text-[var(--text-muted)] leading-relaxed max-w-2xl">
+                  <p className="text-[11px] sm:text-xs text-[var(--text-muted)] leading-relaxed max-w-2xl line-clamp-2">
                     Real-time booking management, capacity monitoring, and client notification dispatch system
                   </p>
                 </div>
 
                 {/* Right: Actions */}
-                <div className="flex items-center gap-3">
-                  <LanguageSwitcher />
-                  <ThemeToggle />
+                <div className="flex items-center gap-2 sm:gap-3 flex-wrap lg:flex-nowrap">
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <LanguageSwitcher />
+                    <ThemeToggle />
+                  </div>
                   
-                  <div className="h-8 w-px bg-[var(--border)]" />
+                  <div className="hidden lg:block h-8 w-px bg-[var(--border)]" />
                   
                   <Link
                     href="/booking"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[var(--gold)] to-[var(--gold-dark)] hover:brightness-110 active:scale-95 shadow-lg shadow-[var(--gold)]/25 transition-all uppercase tracking-wider"
+                    className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl text-[11px] sm:text-xs font-bold text-white bg-gradient-to-r from-[var(--gold)] to-[var(--gold-dark)] hover:brightness-110 active:scale-95 shadow-lg shadow-[var(--gold)]/25 transition-all uppercase tracking-wider whitespace-nowrap"
                   >
-                    <Sparkles className="w-4 h-4" />
+                    <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
                     <span>New Booking</span>
                   </Link>
                 </div>
