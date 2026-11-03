@@ -154,7 +154,7 @@ export default function AdminLogin() {
               )}
 
               {/* Login Form */}
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Username/Email/Phone Input */}
                 <div>
                   <label htmlFor="identifier" className="block text-sm font-semibold text-[var(--text)] mb-2">
@@ -214,7 +214,7 @@ export default function AdminLogin() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-3 px-4 bg-gradient-to-r from-[var(--gold)] to-[var(--gold-dark)] text-white font-bold rounded-xl shadow-lg hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="w-full mt-6 py-4 px-6 bg-gradient-to-r from-[var(--gold)] to-[var(--gold-dark)] text-white text-base font-bold rounded-xl shadow-2xl hover:brightness-110 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {isLoading ? (
                     <>
