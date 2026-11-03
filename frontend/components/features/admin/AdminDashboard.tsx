@@ -730,25 +730,31 @@ export default function AdminDashboard() {
           </nav>
         </div>
 
-        {/* Sidebar Footer */}
-        <div className="p-4 border-t border-[var(--border)] space-y-3 bg-[var(--surface)]">
-          <div className="pt-2 flex items-center justify-between text-xs">
-            <Link
-              href="/"
-              className="text-[var(--gold-text)] hover:text-[var(--gold)] font-semibold flex items-center gap-1"
-            >
-              <span>Public Website</span>
-              <ExternalLink className="w-3 h-3" />
-            </Link>
-            <button
-              onClick={handleResetDemo}
-              className="text-[var(--text-muted)] hover:text-[var(--text)] text-[11px] flex items-center gap-1"
-              title="Reset Demo Records"
-            >
-              <RotateCcw className="w-3 h-3" />
-              <span>Reset</span>
-            </button>
+        {/* Sidebar Footer - Profile & Logout */}
+        <div className="p-4 border-t border-[var(--border)] space-y-2 bg-[var(--surface)]">
+          {/* Profile Info */}
+          <div className="flex items-center gap-3 p-3 rounded-xl bg-[var(--card-subtle)] border border-[var(--border)]">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--gold)] to-[var(--gold-dark)] flex items-center justify-center text-white font-bold text-sm">
+              {currentRole === 'Studio Owner' ? 'SO' : currentRole === 'Receptionist' ? 'RC' : 'ST'}
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="text-xs font-bold text-[var(--text)] truncate">
+                {currentRole}
+              </div>
+              <div className="text-[10px] text-[var(--text-muted)] truncate">
+                Admin Access
+              </div>
+            </div>
           </div>
+
+          {/* Logout Button */}
+          <button
+            onClick={handleAdminLogout}
+            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-red-500/10 text-red-600 dark:text-red-400 hover:bg-red-500/20 border border-red-500/30 transition-all"
+          >
+            <ExternalLink className="w-3.5 h-3.5" />
+            <span>Logout</span>
+          </button>
         </div>
       </aside>
 
