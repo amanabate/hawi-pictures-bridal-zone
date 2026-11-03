@@ -37,7 +37,7 @@ export const OWNER_PLACEHOLDERS: OwnerPlaceholders = {
   landmark: 'Shager Area, Burayu Mariam',
   openingHours: 'Monday – Sunday: 8:00 AM – 7:30 PM',
   openingHoursDetails: 'Wedding & Melse shoots scheduled 24/7 on booked event dates',
-  googleMapsUrl: 'https://maps.google.com/?q=Shager+Burayu+Mariam+Ethiopia',
+  googleMapsUrl: 'https://maps.app.goo.gl/7V8wNiNob81BmDN89',
   phonePrimary: '0988018016',
   phonePrimaryDisplay: '0988 01 80 16',
   phoneSecondary: '0914878007',

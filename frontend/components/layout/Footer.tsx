@@ -180,7 +180,7 @@ export default function Footer() {
                 </a>
 
                 <a
-                  href="https://maps.google.com/?q=Hawi+Pictures+and+Bridal+Zone+Addis+Ababa"
+                  href="https://maps.app.goo.gl/7V8wNiNob81BmDN89"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-2.5 py-1.5 rounded-lg bg-[var(--card-subtle)] hover:bg-[var(--gold)]/10 border border-[var(--border)] hover:border-[var(--gold)]/40 text-xs font-semibold text-[var(--gold-text)] flex items-center gap-1.5 transition-colors"

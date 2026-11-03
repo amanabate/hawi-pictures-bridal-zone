@@ -52,8 +52,8 @@ export default function Navbar() {
 
 
       {/* Main Navigation Bar */}
-      <header className="sticky top-0 z-40 bg-[var(--surface)]/95 backdrop-blur-md border-b border-[var(--border)] transition-colors duration-200 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-6 h-16 sm:h-20 flex items-center justify-between gap-1 sm:gap-1.5 md:gap-2 lg:gap-3">
+      <header className="sticky top-0 z-40 bg-[var(--surface)]/95 backdrop-blur-md border-b border-[var(--border)] transition-colors duration-200">
+        <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-6 h-16 sm:h-20 flex items-center justify-between gap-1 sm:gap-1.5 md:gap-2 lg:gap-3 overflow-hidden">
           {/* Zone 1: Brand title wordmark */}
           <Link
             href="/"
