@@ -53,22 +53,22 @@ export default function Navbar() {
 
       {/* Main Navigation Bar */}
       <header className="sticky top-0 z-40 bg-[var(--surface)]/95 backdrop-blur-md border-b border-[var(--border)] transition-colors duration-200 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-1 sm:gap-2 md:gap-3 lg:gap-4">
+        <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-6 h-16 sm:h-20 flex items-center justify-between gap-1 sm:gap-1.5 md:gap-2 lg:gap-3">
           {/* Zone 1: Brand title wordmark */}
           <Link
             href="/"
-            className="flex items-center gap-1.5 sm:gap-2 group whitespace-nowrap flex-shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-lg p-1"
+            className="flex items-center gap-1 sm:gap-1.5 group whitespace-nowrap flex-shrink min-w-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-lg p-0.5 sm:p-1 max-w-[100px] sm:max-w-[140px] md:max-w-none"
           >
-            <div className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-full bg-gradient-to-br from-[var(--gold)] via-[var(--gold-dark)] to-[#785414] p-0.5 shadow-sm group-hover:scale-105 transition-transform flex items-center justify-center flex-shrink-0">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 rounded-full bg-gradient-to-br from-[var(--gold)] via-[var(--gold-dark)] to-[#785414] p-0.5 shadow-sm group-hover:scale-105 transition-transform flex items-center justify-center flex-shrink-0">
               <div className="w-full h-full rounded-full bg-[#141008] flex items-center justify-center text-[var(--gold)]">
-                <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-[var(--gold)]" />
+                <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 lg:w-5 lg:h-5 text-[var(--gold)]" />
               </div>
             </div>
-            <div className="flex flex-col min-w-0 max-w-[120px] sm:max-w-none">
-              <span className="font-serif text-sm sm:text-base lg:text-lg xl:text-xl font-bold tracking-tight text-[var(--text)] leading-tight truncate">
+            <div className="flex flex-col min-w-0 flex-1">
+              <span className="font-serif text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-bold tracking-tight text-[var(--text)] leading-tight truncate">
                 Hawi Pictures
               </span>
-              <span className="text-[7px] sm:text-[8px] lg:text-[9px] tracking-[0.15em] sm:tracking-[0.2em] uppercase font-bold text-[var(--gold-text)] truncate">
+              <span className="text-[6px] sm:text-[7px] md:text-[8px] lg:text-[9px] tracking-[0.12em] sm:tracking-[0.15em] md:tracking-[0.18em] uppercase font-bold text-[var(--gold-text)] truncate">
                 & Bridal Zone
               </span>
             </div>
@@ -111,22 +111,22 @@ export default function Navbar() {
           </nav>
 
           {/* Zone 3: Actions (Desktop/Tablet - Language Switcher + ThemeToggle + Quick Call + Primary CTA) */}
-          <div className="hidden md:flex items-center gap-1 lg:gap-2 flex-shrink-0">
+          <div className="hidden md:flex items-center gap-1 flex-shrink-0">
             {/* Language Switcher Pill */}
             <LanguageSwitcher />
 
             {/* Theme Toggle Button */}
             <ThemeToggle />
 
-            {/* Quick Call Pill */}
-            <div className="relative hidden lg:block">
+            {/* Quick Call Pill - Only show on large screens */}
+            <div className="relative hidden xl:block">
               <button
                 type="button"
                 onClick={() => setShowCallDropdown(!showCallDropdown)}
-                className="inline-flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 text-xs font-semibold text-[var(--text)] bg-[var(--card-subtle)] hover:bg-[var(--border)] border border-[var(--border)] rounded-full transition-colors whitespace-nowrap"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-[var(--text)] bg-[var(--card-subtle)] hover:bg-[var(--border)] border border-[var(--border)] rounded-full transition-colors whitespace-nowrap"
               >
                 <Phone className="w-3.5 h-3.5 text-[var(--gold)]" />
-                <span className="hidden xl:inline">{t('common.callUs')}</span>
+                <span className="hidden 2xl:inline">{t('common.callUs')}</span>
               </button>
 
               {showCallDropdown && (
@@ -171,11 +171,11 @@ export default function Navbar() {
             {/* Book Now Primary CTA */}
             <Link
               href="/booking"
-              className="inline-flex items-center gap-1.5 lg:gap-2 px-3 lg:px-4 py-1.5 lg:py-2 text-xs lg:text-sm font-semibold text-[#141008] bg-gradient-to-r from-[var(--gold)] to-[var(--gold-dark)] hover:brightness-110 shadow-sm rounded-full transition-all hover:shadow-md whitespace-nowrap"
+              className="inline-flex items-center gap-1 lg:gap-1.5 px-2.5 lg:px-3 py-1.5 text-[11px] lg:text-xs font-bold text-[#141008] bg-gradient-to-r from-[var(--gold)] to-[var(--gold-dark)] hover:brightness-110 shadow-sm rounded-full transition-all hover:shadow-md whitespace-nowrap max-w-[120px] lg:max-w-none"
+              title={t('nav.bookNowNav')}
             >
-              <Calendar className="w-3.5 h-3.5 lg:w-4 lg:h-4 text-[#141008]" />
-              <span className="hidden lg:inline">{t('nav.bookNowNav')}</span>
-              <span className="lg:hidden">{t('nav.bookShort') || 'Book'}</span>
+              <Calendar className="w-3 h-3 lg:w-3.5 lg:h-3.5 flex-shrink-0 text-[#141008]" />
+              <span className="truncate">{t('nav.bookShort') || 'Book'}</span>
             </Link>
           </div>
 
