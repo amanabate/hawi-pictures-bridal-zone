@@ -625,11 +625,11 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      {/* LEFT SIDEBAR */}
+      {/* LEFT SIDEBAR - Fixed Position */}
       <aside
         className={`${
           mobileSidebarOpen ? 'block' : 'hidden'
-        } md:block w-full md:w-64 bg-[var(--surface)] border-r border-[var(--border)] shrink-0 flex flex-col h-screen overflow-y-auto z-30 transition-colors duration-200`}
+        } md:block fixed md:sticky top-0 left-0 w-full md:w-64 h-screen bg-[var(--surface)] border-r border-[var(--border)] shrink-0 flex flex-col overflow-y-auto z-40 transition-colors duration-200`}
       >
         <div className="flex-1 overflow-y-auto">
           {/* Studio Brand Header */}
@@ -758,8 +758,8 @@ export default function AdminDashboard() {
         </div>
       </aside>
 
-      {/* MAIN CONTENT AREA */}
-      <main className="flex-1 bg-[var(--bg)] p-4 sm:p-8 lg:p-10 overflow-y-auto min-h-screen transition-colors duration-200">
+      {/* MAIN CONTENT AREA - With left margin for fixed sidebar */}
+      <main className="flex-1 md:ml-64 bg-[var(--bg)] p-4 sm:p-8 lg:p-10 overflow-y-auto min-h-screen transition-colors duration-200">
         {/* ==================== 1. DASHBOARD VIEW ==================== */}
         {activeTab === 'Dashboard' && (
           <div className="space-y-8 max-w-7xl mx-auto">
