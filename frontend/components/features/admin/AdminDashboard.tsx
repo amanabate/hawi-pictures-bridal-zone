@@ -1016,7 +1016,9 @@ export default function AdminDashboard() {
 
                             {/* Event Date & Time */}
                             <td className="py-4 px-4">
-                              <div className="font-mono font-bold text-[var(--text)]">{formatDate(b.eventDate)}</div>
+                              <div className="font-mono font-bold text-[var(--text)]" suppressHydrationWarning>
+                                {formatDate(b.eventDate)}
+                              </div>
                               <div className="text-[11px] text-[var(--text-muted)] mt-0.5">{b.timeOfDay}</div>
                             </td>
 
