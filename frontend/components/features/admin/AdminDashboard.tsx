@@ -763,27 +763,55 @@ export default function AdminDashboard() {
         {/* ==================== 1. DASHBOARD VIEW ==================== */}
         {activeTab === 'Dashboard' && (
           <div className="space-y-8 max-w-7xl mx-auto">
-            {/* Top Bar Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[var(--border)]">
-              <div>
-                <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[var(--text)] tracking-tight">
-                  {t('admin.sidebarTitle')}
-                </h1>
-                <p className="text-xs text-[var(--text-muted)] mt-1">
-                  Logged in as <strong className="text-[var(--gold)]">{currentRole}</strong> · Live capacity and client notification dispatch.
-                </p>
-              </div>
+            {/* Professional Dashboard Header */}
+            <div className="bg-gradient-to-br from-[var(--card)] via-[var(--surface)] to-[var(--card)] border border-[var(--border)] rounded-2xl shadow-lg p-6 sm:p-8">
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                {/* Left: Title & Status */}
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--gold)] to-[var(--gold-dark)] flex items-center justify-center shadow-md">
+                      <LayoutDashboard className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[var(--text)] tracking-tight">
+                        {t('admin.sidebarTitle')}
+                      </h1>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[var(--gold)]/10 border border-[var(--gold)]/30">
+                          <Shield className="w-3 h-3 text-[var(--gold)]" />
+                          <span className="text-[10px] font-bold text-[var(--gold)] uppercase tracking-wider">
+                            {currentRole}
+                          </span>
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30">
+                          <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                          <span className="text-[10px] font-semibold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider">
+                            Live
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-xs text-[var(--text-muted)] leading-relaxed max-w-2xl">
+                    Real-time booking management, capacity monitoring, and client notification dispatch system
+                  </p>
+                </div>
 
-              <div className="flex items-center gap-3">
-                <LanguageSwitcher />
-                <ThemeToggle className="hidden sm:inline-flex" />
-                <Link
-                  href="/booking"
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-[#141008] bg-gradient-to-r from-[var(--gold)] to-[var(--gold-dark)] hover:brightness-105 transition-all flex items-center gap-1.5 shadow-md font-bold"
-                >
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>{t('admin.actions.addNew')}</span>
-                </Link>
+                {/* Right: Actions */}
+                <div className="flex items-center gap-3">
+                  <LanguageSwitcher />
+                  <ThemeToggle />
+                  
+                  <div className="h-8 w-px bg-[var(--border)]" />
+                  
+                  <Link
+                    href="/booking"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[var(--gold)] to-[var(--gold-dark)] hover:brightness-110 active:scale-95 shadow-lg shadow-[var(--gold)]/25 transition-all uppercase tracking-wider"
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    <span>New Booking</span>
+                  </Link>
+                </div>
               </div>
             </div>
 
