@@ -87,6 +87,7 @@ export default function BookingForm() {
   // Confirmation modal state
   const [confirmedBooking, setConfirmedBooking] = useState<Booking | null>(null);
   const [copiedCode, setCopiedCode] = useState(false);
+  const [copiedAccountIndex, setCopiedAccountIndex] = useState<number | null>(null);
   const [hasLoadedDraft, setHasLoadedDraft] = useState(false);
 
   // Restore saved offline draft on client mount only after initial hydration completes
@@ -812,45 +813,46 @@ export default function BookingForm() {
                   <span>{t('booking.paymentSectionTitle')}</span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-[var(--text)]">
-                      {t('booking.paymentSubtitle')}
-                    </label>
-                    <select
-                      value={paymentMethod}
-                      onChange={(e) => setPaymentMethod(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl bg-[var(--input-bg)] border border-[var(--border)] text-xs sm:text-sm text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--gold)] transition-all"
+                {/* Bank Account Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {PAYMENT_METHODS.map((method, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => {
+                        setPaymentMethod(method.name);
+                        navigator.clipboard.writeText(method.accountNumber);
+                        setCopiedAccountIndex(idx);
+                        setTimeout(() => setCopiedAccountIndex(null), 2000);
+                      }}
+                      className={`p-4 rounded-xl border text-left transition-all ${
+                        paymentMethod === method.name
+                          ? 'border-[var(--gold)] bg-[var(--card-subtle)] ring-2 ring-[var(--gold)]/30'
+                          : 'border-[var(--border)] bg-[var(--surface)] hover:border-[var(--gold)]/50'
+                      }`}
                     >
-                      {PAYMENT_METHODS.map((m, idx) => (
-                        <option key={idx} value={m.name} className="bg-[var(--surface)] text-[var(--text)]">
-                          {m.name} ({m.accountNumber})
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-[var(--text)]">
-                      Ref / Txn Number
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="e.g. TF2611... or CBE Ref"
-                      value={referenceNumber}
-                      onChange={(e) => setReferenceNumber(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl bg-[var(--input-bg)] border border-[var(--border)] text-xs sm:text-sm text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--gold)] transition-all font-mono"
-                    />
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-[var(--text)]">
-                      {t('booking.depositRequiredLabel')}
-                    </label>
-                    <div className="px-4 py-2.5 rounded-xl bg-[var(--card-subtle)] border border-[var(--border)] text-xs sm:text-sm font-bold text-[var(--gold)] font-mono tabular-nums">
-                      {currentPackage.depositAmount || 'To be confirmed with studio'}
-                    </div>
-                  </div>
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1">
+                          <div className="text-xs font-semibold text-[var(--text)] mb-1">
+                            {method.name}
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-mono text-[var(--gold)]">
+                              {method.accountNumber}
+                            </span>
+                            {copiedAccountIndex === idx ? (
+                              <Check className="w-3.5 h-3.5 text-emerald-500" />
+                            ) : (
+                              <Copy className="w-3.5 h-3.5 text-[var(--text-muted)]" />
+                            )}
+                          </div>
+                        </div>
+                        {paymentMethod === method.name && (
+                          <CheckCircle2 className="w-4 h-4 text-[var(--gold)] shrink-0" />
+                        )}
+                      </div>
+                    </button>
+                  ))}
                 </div>
 
                 {/* File Upload Box */}
