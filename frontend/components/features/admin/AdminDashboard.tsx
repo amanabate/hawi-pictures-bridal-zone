@@ -629,9 +629,9 @@ export default function AdminDashboard() {
       <aside
         className={`${
           mobileSidebarOpen ? 'block' : 'hidden'
-        } md:block w-full md:w-64 bg-[var(--surface)] border-r border-[var(--border)] shrink-0 flex flex-col justify-between min-h-screen z-30 transition-colors duration-200`}
+        } md:block w-full md:w-64 bg-[var(--surface)] border-r border-[var(--border)] shrink-0 flex flex-col h-screen overflow-y-auto z-30 transition-colors duration-200`}
       >
-        <div>
+        <div className="flex-1 overflow-y-auto">
           {/* Studio Brand Header */}
           <div className="p-6 border-b border-[var(--border)]">
             <Link href="/" className="flex items-center gap-3 group">
@@ -732,21 +732,7 @@ export default function AdminDashboard() {
 
         {/* Sidebar Footer */}
         <div className="p-4 border-t border-[var(--border)] space-y-3 bg-[var(--surface)]">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-wider">
-              Language
-            </span>
-            <LanguageSwitcher />
-          </div>
-
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-wider">
-              Theme & Style
-            </span>
-            <ThemeToggle />
-          </div>
-
-          <div className="pt-2 border-t border-[var(--border)] flex items-center justify-between text-xs">
+          <div className="pt-2 flex items-center justify-between text-xs">
             <Link
               href="/"
               className="text-[var(--gold-text)] hover:text-[var(--gold)] font-semibold flex items-center gap-1"
