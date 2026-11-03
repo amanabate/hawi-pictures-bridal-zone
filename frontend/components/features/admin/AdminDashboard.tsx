@@ -86,7 +86,6 @@ type NavTab =
   | 'Packages'
   | 'Gallery'
   | 'Activity Log'
-  | 'Reviews'
   | 'Customers'
   | 'Settings';
 
@@ -548,7 +547,6 @@ export default function AdminDashboard() {
       badge: galleryTrashCount > 0 ? `${galleryTrashCount} in trash` : undefined
     },
     { id: 'Activity Log', label: t('admin.nav.activityLog'), icon: History, badge: activityLogs.length > 0 ? activityLogs.length : undefined },
-    { id: 'Reviews', label: t('admin.nav.reviews'), icon: Star },
     { id: 'Customers', label: t('admin.nav.customers'), icon: Users },
     { id: 'Settings', label: t('admin.nav.settings'), icon: Settings },
   ];
@@ -1422,59 +1420,7 @@ export default function AdminDashboard() {
           <ActivityLogView />
         )}
 
-        {/* ==================== 8. REVIEWS VIEW ==================== */}
-        {activeTab === 'Reviews' && (
-          <div className="space-y-6 max-w-7xl mx-auto">
-            <div className="pb-6 border-b border-[var(--border)]">
-              <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[var(--text)]">
-                Customer Reviews & Testimonials
-              </h1>
-              <p className="text-xs text-[var(--text-muted)] mt-1">
-                Feedback collected from newly married couples in Addis Ababa and abroad.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                {
-                  couple: 'Selamawit & Dawit Bekele',
-                  venue: 'Ethiopian Skylight Hotel',
-                  pkg: 'Gold Royal Package',
-                  content: 'Hawi Pictures exceeded all our expectations! The photography team was so calm and organized. The makeup lasted until 2:00 AM without a smudge.'
-                },
-                {
-                  couple: 'Bethlehem Haile & Yonas Girma',
-                  venue: 'Sheraton Addis & Kuriftu',
-                  pkg: 'Diamond Splendor (2-Day)',
-                  content: 'The drone footage over Kuriftu lake looks like an international cinema film. Our relatives in diaspora love the album and video!'
-                },
-                {
-                  couple: 'Meron Tadesse & Dr. Henok',
-                  venue: 'Haile Grand Hotel',
-                  pkg: 'Imperial Habesha Luxury',
-                  content: 'Having the bridal suite, imported gown fitting, and 4 master photographers managed seamlessly saved us weeks of wedding planning stress.'
-                }
-              ].map((rev, i) => (
-                <div key={i} className="p-6 rounded-2xl bg-[var(--card)] border border-[var(--border)] shadow-sm space-y-4">
-                  <div className="flex items-center gap-1 text-[var(--gold)]">
-                    {[...Array(5)].map((_, s) => (
-                      <Star key={s} className="w-4 h-4 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-xs text-[var(--text-muted)] leading-relaxed italic">
-                    &ldquo;{rev.content}&rdquo;
-                  </p>
-                  <div className="pt-3 border-t border-[var(--border)]">
-                    <div className="font-serif text-base font-bold text-[var(--text)]">{rev.couple}</div>
-                    <div className="text-xs text-[var(--text-muted)]">{rev.venue} · {rev.pkg}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* ==================== 9. CUSTOMERS VIEW ==================== */}
+        {/* ==================== 8. CUSTOMERS VIEW ==================== */}
         {activeTab === 'Customers' && (
           <div className="space-y-6 max-w-7xl mx-auto">
             <div className="pb-6 border-b border-[var(--border)]">
