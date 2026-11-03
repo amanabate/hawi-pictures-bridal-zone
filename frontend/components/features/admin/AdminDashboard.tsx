@@ -2,6 +2,8 @@
 
 import React, { useState, useSyncExternalStore, useMemo, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useAdminAuth } from '@/lib/admin-auth-context';
 import {
   LayoutDashboard,
   FileText,
@@ -38,7 +40,8 @@ import {
   Copy,
   UserCheck,
   Bell,
-  BellOff
+  BellOff,
+  LogOut
 } from 'lucide-react';
 import {
   Booking,
@@ -103,6 +106,8 @@ const COMMON_REASONS = [
 ];
 
 export default function AdminDashboard() {
+  const router = useRouter();
+  const { logout, user } = useAdminAuth();
   const { t, language, formatCurrency, formatDate } = useLanguage();
   const bookings = useSyncExternalStore(
     subscribeBookings,
@@ -123,9 +128,15 @@ export default function AdminDashboard() {
   const [toast, setToast] = useState<ToastState | null>(null);
   const [adminNoteInput, setAdminNoteInput] = useState('');
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   // Studio Role Switcher: Studio Owner vs Receptionist
-  const [currentRole, setCurrentRole] = useState<'Studio Owner' | 'Receptionist'>('Studio Owner');
+  const [currentRole, setCurrentRole] = useState<'Studio Owner' | 'Receptionist'>(() => {
+    if (user?.role === 'Studio Owner' || user?.role === 'Receptionist') {
+      return user.role;
+    }
+    return 'Studio Owner';
+  });
 
   // Reason Modal State (for Rejection / Cancellation)
   const [reasonModalTarget, setReasonModalTarget] = useState<{
@@ -286,9 +297,14 @@ export default function AdminDashboard() {
     await clearPrivateCaches();
     try {
       sessionStorage.clear();
-      localStorage.removeItem('hawi_admin_session');
     } catch {}
-    showToast('Admin session and cached runtime data cleared.');
+    logout();
+    router.push('/admin');
+  };
+
+  const confirmLogout = () => {
+    setShowLogoutConfirm(false);
+    handleAdminLogout();
   };
 
   // Status Action Handlers
@@ -598,6 +614,67 @@ export default function AdminDashboard() {
         </div>
       )}
 
+      {/* LOGOUT CONFIRMATION MODAL */}
+      {showLogoutConfirm && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="logout-title"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 animate-in fade-in"
+          onClick={() => setShowLogoutConfirm(false)}
+        >
+          <div
+            className="relative w-full max-w-md bg-[var(--surface)] border border-[var(--border)] rounded-2xl shadow-2xl p-6 animate-in zoom-in-95 slide-in-from-bottom-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center">
+                <LogOut className="w-6 h-6 text-red-500" />
+              </div>
+              <div>
+                <h3 id="logout-title" className="font-serif text-xl font-bold text-[var(--text)]">
+                  Logout Confirmation
+                </h3>
+                <p className="text-xs text-[var(--text-muted)]">
+                  Are you sure you want to sign out?
+                </p>
+              </div>
+            </div>
+
+            {/* Message */}
+            <div className="mb-6 p-4 bg-[var(--card-subtle)] border border-[var(--border)] rounded-xl">
+              <p className="text-sm text-[var(--text)] leading-relaxed">
+                You will be logged out of the admin dashboard and redirected to the login page.
+                {user && (
+                  <span className="block mt-2 text-xs text-[var(--text-muted)]">
+                    Logged in as: <strong>{user.username}</strong> ({user.role})
+                  </span>
+                )}
+              </p>
+            </div>
+
+            {/* Actions */}
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setShowLogoutConfirm(false)}
+                className="flex-1 px-4 py-2.5 rounded-xl border border-[var(--border)] text-sm font-semibold text-[var(--text)] hover:bg-[var(--card-subtle)] transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={confirmLogout}
+                className="flex-1 px-4 py-2.5 rounded-xl text-sm font-bold text-white bg-red-500 hover:bg-red-600 shadow-lg transition-all active:scale-95"
+              >
+                Yes, Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Mobile Top Header */}
       <div className="md:hidden flex items-center justify-between p-4 bg-[var(--surface)] border-b border-[var(--border)]">
         <div className="flex items-center gap-2.5">
@@ -749,10 +826,10 @@ export default function AdminDashboard() {
 
           {/* Logout Button */}
           <button
-            onClick={handleAdminLogout}
+            onClick={() => setShowLogoutConfirm(true)}
             className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-red-500/10 text-red-600 dark:text-red-400 hover:bg-red-500/20 border border-red-500/30 transition-all"
           >
-            <ExternalLink className="w-3.5 h-3.5" />
+            <LogOut className="w-3.5 h-3.5" />
             <span>Logout</span>
           </button>
         </div>

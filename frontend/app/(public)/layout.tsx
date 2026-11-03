@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import '../globals.css';
 import { LanguageProvider } from '@/lib/language-context';
+import { AdminAuthProvider } from '@/lib/admin-auth-context';
 import OfflineBanner from '@/components/pwa/OfflineBanner';
 import PWAInstallPrompt from '@/components/pwa/PWAInstallPrompt';
 import PWAUpdateToast from '@/components/pwa/PWAUpdateToast';
@@ -94,12 +95,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         suppressHydrationWarning
       >
         <LanguageProvider>
-          <StandaloneHeader />
-          {children}
-          {/* PWA Enhancements: Offline banner, auto install prompt, update notification */}
-          <OfflineBanner />
-          <PWAInstallPrompt />
-          <PWAUpdateToast />
+          <AdminAuthProvider>
+            <StandaloneHeader />
+            {children}
+            {/* PWA Enhancements: Offline banner, auto install prompt, update notification */}
+            <OfflineBanner />
+            <PWAInstallPrompt />
+            <PWAUpdateToast />
+          </AdminAuthProvider>
         </LanguageProvider>
       </body>
     </html>

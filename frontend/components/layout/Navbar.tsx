@@ -25,7 +25,7 @@ export default function Navbar() {
     { label: t('nav.packages'), href: '/packages' },
     { label: t('nav.booking'), href: '/booking' },
     { label: t('booking.checkBookingLink') || 'Check Status', href: '/booking/check' },
-    { label: t('nav.admin'), href: '/admin' },
+    // Admin link removed - access via direct URL /admin with login
   ];
 
   const handleLinkClick = (href: string, e: React.MouseEvent) => {
