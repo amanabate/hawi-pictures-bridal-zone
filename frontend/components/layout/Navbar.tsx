@@ -52,23 +52,23 @@ export default function Navbar() {
 
 
       {/* Main Navigation Bar */}
-      <header className="sticky top-0 z-40 bg-[var(--surface)]/95 backdrop-blur-md border-b border-[var(--border)] transition-colors duration-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4 lg:gap-8">
+      <header className="sticky top-0 z-40 bg-[var(--surface)]/95 backdrop-blur-md border-b border-[var(--border)] transition-colors duration-200 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-2 sm:gap-4 lg:gap-8">
           {/* Zone 1: Brand title wordmark */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 sm:gap-3 group whitespace-nowrap shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-lg p-1"
+            className="flex items-center gap-2 sm:gap-2.5 group whitespace-nowrap shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-lg p-1 min-w-0"
           >
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-[var(--gold)] via-[var(--gold-dark)] to-[#785414] p-0.5 shadow-sm group-hover:scale-105 transition-transform flex items-center justify-center">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-[var(--gold)] via-[var(--gold-dark)] to-[#785414] p-0.5 shadow-sm group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
               <div className="w-full h-full rounded-full bg-[#141008] flex items-center justify-center text-[var(--gold)]">
-                <Sparkles className="w-5 h-5 text-[var(--gold)]" />
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--gold)]" />
               </div>
             </div>
-            <div className="flex flex-col">
-              <span className="font-serif text-lg sm:text-2xl font-bold tracking-tight text-[var(--text)] leading-tight">
+            <div className="flex flex-col min-w-0">
+              <span className="font-serif text-base sm:text-lg lg:text-2xl font-bold tracking-tight text-[var(--text)] leading-tight truncate">
                 Hawi Pictures
               </span>
-              <span className="text-[9px] sm:text-[10px] tracking-[0.25em] uppercase font-bold text-[var(--gold-text)]">
+              <span className="text-[8px] sm:text-[9px] lg:text-[10px] tracking-[0.2em] sm:tracking-[0.25em] uppercase font-bold text-[var(--gold-text)] truncate">
                 & Bridal Zone
               </span>
             </div>
@@ -111,7 +111,7 @@ export default function Navbar() {
           </nav>
 
           {/* Zone 3: Actions (Language Switcher + ThemeToggle + Quick Call + Primary CTA) */}
-          <div className="hidden sm:flex items-center gap-2 sm:gap-3 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 lg:gap-3 shrink-0">
             {/* Language Switcher Pill */}
             <LanguageSwitcher />
 
